@@ -16,7 +16,7 @@
 #$4 = Specify the --sjdbOverhang for generating the index with STAR (ENTER A VALUE)
 #$5 = Directory for output files
 
-    if [  $# -le 4 ] || [ $1 == "--help"] || [ $1 == "-h"]
+    if [  $# -le 4 ] || [ $1 == "--help" ] || [ $1 == "-h" ]
 	then 
 		echo -e "\nUsage: x1_align.sh </path/with/fastq> <file.gtf> <reference.fasta> <Overhang> </output/directory> \n" 
 		echo 
