@@ -8,7 +8,7 @@
 # #SBATCH -o slurm.%j.out 
 # #SBATCH -e slurm.%j.err 
 #SBATCH --mail-type=END
-#SBATCH --mail-user=marc.tormo@upf.edu
+#SBATCH --mail-user=winona.oliveros01@estudiant.upf.edu
 
 #$1 = path with sample files (fastq)
 #$2 = GTF file (whole path)
