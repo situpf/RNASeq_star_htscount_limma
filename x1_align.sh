@@ -10,17 +10,20 @@
 #SBATCH --mail-type=END
 #SBATCH --mail-user=marc.tormo@upf.edu
 
+#$1 = path with sample files (fastq)
+#$2 = GTF file (whole path)
+#$3 = REF file (FASTA - whole path)
 
 #how many CPUs to use on the current machine?
 NUMCPUS=4
 
 ### list of samples
 #FASTQLOC="results"
-reads=`ls *.fastq.gz`
+reads=`ls $1*.fastq.gz`
 
 
-GTF="gtf/Schizosaccharomyces_pombe.ASM294v2.35.chr.gtf"
-REF="ref/Schizosaccharomyces_pombe.ASM294v2.dna.toplevel.fa"
+GTF=$2
+REF=$3
 
 
 ##if these programs are not in any PATH directories, please edit accordingly:
