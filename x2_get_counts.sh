@@ -21,7 +21,7 @@
 		echo
 		echo "</path/with/fastq>:			        Enter the whole path with the sample .fastq files. "
 		echo "<file.gtf>:			                Specify the GTF file for generating the Index. "
-        echo "<star/output/directory/>:         	Enter the directory with the star files. Example: /homes/users/username/results/star is the directory -> specify /homes/users/username/results/ "
+        	echo "<star/output/directory/>:         		Enter the directory with the star files. Example: /homes/users/username/results/star is the directory -> specify /homes/users/username/results/ "
 		echo
 		exit 1
 	fi 
