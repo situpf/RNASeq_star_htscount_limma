@@ -11,9 +11,23 @@
 
 #$1 = directory with sample files (fastq)
 #$2 = GTF file ; input the whole path
+#$3 = Directory with star output files [/path/to/results/]star -> last part /star/ not necessary
+
+    if [  $# -le 4 ] || [ $1 == "--help" ] || [ $1 == "-h" ]
+	then 
+		echo -e "\nUsage: x2_get_counts.sh </path/with/fastq> <file.gtf> </star/output/directory> \n" 
+		echo 
+		echo "OPTIONS: "
+		echo
+		echo "</path/with/fastq>:			        Enter the whole path with the sample .fastq files. "
+		echo "<file.gtf>:			                Specify the GTF file for generating the Index. "
+        echo "<star/output/directory/>:         	Enter the directory with the star files. Example: /homes/users/username/results/star is the directory -> specify /homes/users/username/results/ "
+		echo
+		exit 1
+	fi 
 
 
-mkdir htscount/
+mkdir $3htscount/
 module load parallel/20151222
 module load HTSeq/0.9.1-foss-2016b-Python-2.7.12
 ###  reverse gene counts with htseq-counts
@@ -21,8 +35,8 @@ function counts() {
     base=`basename "$1" | sed 's/.fastq.gz//g'`
     echo "processing "$base
     ### counts from bam sorted by position and not strand-specific assay
-    htseq-count -f bam -r pos -s reverse star/$base\Aligned.sortedByCoord.out.bam $2 > htscount/$base\_htseq.csv
+    htseq-count -f bam -r pos -s reverse $3star/$base\Aligned.sortedByCoord.out.bam $2 > $3htscount/$base\_htseq.csv
 }
 export -f counts
 
-ls $1*.fastq.gz | parallel --progress  -k counts {}
+ls $1*.fastq.gz | parallel --progress  -k counts {} $2 $3
