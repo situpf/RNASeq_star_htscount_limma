@@ -57,7 +57,7 @@ if [ ! -d star ]; then mkdir -p $5star;fi
 
 for i in $reads; do
     ### remove extension
-    sample=`echo $i | sed 's/\.fastq\.gz//g'`
+    sample=`echo $i | | sed 's/\/*\///g' | sed 's/\.fastq\.gz//g'` 
 
     STAR --runThreadN $NUMCPUS --genomeDir $5star_index --readFilesIn $i --readFilesCommand zcat --outFileNamePrefix $5star/$sample --outSAMtype BAM SortedByCoordinate
 done
