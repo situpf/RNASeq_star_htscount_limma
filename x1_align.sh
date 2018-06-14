@@ -24,9 +24,9 @@
 		echo
 		echo "</path/with/fastq>:			Enter the whole path with the sample .fastq files. "
 		echo "<file.gtf>:			        Specify the GTF file for generating the Index. "
-		echo "<reference.fasta>:		    Specify the FASTA file with the reference genome (only one allowed)."
-       		echo "<Overhang>:                   Specify a VALUE for the --sjdbOverhang parameter for aligning with STAR."
-        	echo "</output/directory/>:         Enter the desired directory where will be stored output files. "
+		echo "<reference.fasta>:		    	Specify the FASTA file with the reference genome (only one allowed)."
+       		echo "<Overhang>:                   		Specify a VALUE for the --sjdbOverhang parameter for aligning with STAR."
+        	echo "</output/directory/>:         		Enter the desired directory where will be stored output files. "
 		echo
 		exit 1
 	fi 
