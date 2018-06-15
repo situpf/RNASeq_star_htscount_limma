@@ -4,7 +4,7 @@
 #SBATCH --mem-per-cpu=8G 
 
 #SBATCH --mail-type=END
-#SBATCH --mail-user=marc.tormo@upf.edu
+#SBATCH --mail-user=winona.oliveros01@estudiant.upf.edu
 
 #module load R/3.2.3
 #Rscript x2_rnaseq_get-counts.R
