@@ -13,7 +13,7 @@
 #$2 = GTF file ; input the whole path
 #$3 = Directory with star output files [/path/to/results/]star -> last part /star/ not necessary
 
-    if [  $# -le 4 ] || [ $1 == "--help" ] || [ $1 == "-h" ]
+    if [  $# -le 2 ] || [ $1 == "--help" ] || [ $1 == "-h" ]
 	then 
 		echo -e "\nUsage: x2_get_counts.sh </path/with/fastq> <file.gtf> </star/output/directory> \n" 
 		echo 
