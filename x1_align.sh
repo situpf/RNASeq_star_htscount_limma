@@ -22,12 +22,12 @@
 		echo 
 		echo "OPTIONS: "
 		echo
-		echo "</path/with/fastq>:			Enter the whole path with the sample .fastq files. "
+		echo "</path/with/fastq>:			Enter the whole path with the sample .fastq files."
 		echo "<file.gtf>:			        Specify the GTF file for generating the Index. "
 		echo "<reference.fasta>:		    	Specify the FASTA file with the reference genome (only one allowed)."
        		echo "<Overhang>:                   		Specify a VALUE for the --sjdbOverhang parameter for aligning with STAR."
         	echo "</output/directory/>:         		Enter the desired directory where will be stored output files. "
-		echo
+		echo "[-p]					Option -p for paired fastq files. "
 		exit 1
 	fi 
 
@@ -36,7 +36,12 @@ NUMCPUS=4
 
 ### list of samples
 #FASTQLOC="results"
-reads=`ls $1*.fastq.gz`
+if [ $6 == "-p" ];
+	then
+		reads_forward=`ls $1*_forward.fastq.gz`
+	else 
+		reads=`ls $1*.fastq.gz`
+	fi
 
 
 GTF=$2
@@ -55,12 +60,23 @@ STAR --runThreadN $NUMCPUS --runMode genomeGenerate --genomeDir $5star_index --g
 
 if [ ! -d star ]; then mkdir -p $5star;fi
 
-for i in $reads; do
-    ### remove extension
-    sample=`echo $i | sed 's/\w*\///g' | sed 's/\.fastq\.gz//g'` 
+if [ $6 == "-p" ];
+then
+	for i in $reads_forward; do
+	### remove extension
+		sample_forward=`echo $i | sed 's/\w*\///g' | sed 's/\_forward\.fastq\.gz//g'`
+		sample_reverse=$sample_forward\_reverse.fastq.gz
+	
+		STAR --runThreadN $NUMCPUS --genomeDir $5star_index --readFilesIn $i $sample_reverse --readFilesCommand zcat --outFileNamePrefix $5star/$sample_forward --outSAMtype BAM SortedByCoordinate
+	done
+else
+	for i in $reads; do
+   	 ### remove extension
+    		sample=`echo $i | sed 's/\w*\///g' | sed 's/\.fastq\.gz//g'` 
 
-    STAR --runThreadN $NUMCPUS --genomeDir $5star_index --readFilesIn $i --readFilesCommand zcat --outFileNamePrefix $5star/$sample --outSAMtype BAM SortedByCoordinate
-done
+    		STAR --runThreadN $NUMCPUS --genomeDir $5star_index --readFilesIn $i --readFilesCommand zcat --outFileNamePrefix $5star/$sample --outSAMtype BAM SortedByCoordinate
+	done
+fi
 
 
 #### get stats with multiqc
