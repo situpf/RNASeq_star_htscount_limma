@@ -38,7 +38,7 @@ NUMCPUS=4
 #FASTQLOC="results"
 if [ $6 == "-p" ];
 	then
-		reads_forward=`ls $1*_forward.fastq.gz`
+		reads_forward=`ls $1*_R1.fastq.gz`
 	else 
 		reads=`ls $1*.fastq.gz`
 	fi
@@ -65,7 +65,7 @@ then
 	for i in $reads_forward; do
 	### remove extension
 		sample_forward=`echo $i | sed 's/\w*\///g' | sed 's/\_forward\.fastq\.gz//g'`
-		sample_reverse=$sample_forward\_reverse.fastq.gz
+		sample_reverse=$sample_R2\_reverse.fastq.gz
 	
 		STAR --runThreadN $NUMCPUS --genomeDir $5star_index --readFilesIn $i $1$sample_reverse --readFilesCommand zcat --outFileNamePrefix $5star/$sample_forward --outSAMtype BAM SortedByCoordinate
 	done
