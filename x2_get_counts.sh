@@ -33,7 +33,7 @@ module load parallel/20151222
 module load HTSeq/0.9.1-foss-2016b-Python-2.7.12
 ###  reverse gene counts with htseq-counts
 function counts() {
-    base=`basename "$1" | sed 's/.fastq.gz//g'`
+    base=`basename "$1" | sed 's/(\_R1_\w*)*.fastq.gz//g'`
     echo "processing "$base
     ### counts from bam sorted by position and not strand-specific assay
     htseq-count -f bam -r pos -s $4 $3star/$base\Aligned.sortedByCoord.out.bam $2 > $3htscount/$base\_htseq.csv
