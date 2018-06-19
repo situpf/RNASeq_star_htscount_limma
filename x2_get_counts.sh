@@ -22,6 +22,7 @@
 		echo "</path/with/fastq>:			        Enter the whole path with the sample .fastq files. "
 		echo "<file.gtf>:			                Specify the GTF file for generating the Index. "
         	echo "<star/output/directory/>:         		Enter the directory with the star files. Example: /homes/users/username/results/star is the directory -> specify /homes/users/username/results/ "
+		echo "[yes|no|reverse]: 				Enter whether the data is from a strand-specific assay."
 		echo
 		exit 1
 	fi 
@@ -35,8 +36,8 @@ function counts() {
     base=`basename "$1" | sed 's/.fastq.gz//g'`
     echo "processing "$base
     ### counts from bam sorted by position and not strand-specific assay
-    htseq-count -f bam -r pos -s reverse $3star/$base\Aligned.sortedByCoord.out.bam $2 > $3htscount/$base\_htseq.csv
+    htseq-count -f bam -r pos -s $4 $3star/$base\Aligned.sortedByCoord.out.bam $2 > $3htscount/$base\_htseq.csv
 }
 export -f counts
 
-ls $1*.fastq.gz | parallel --progress  -k counts {} $2 $3
+ls $1*.fastq.gz | parallel --progress  -k counts {} $2 $3 $4
