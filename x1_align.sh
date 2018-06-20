@@ -64,7 +64,7 @@ if [ $6 == "-p" ];
 then
 	for i in $reads_forward; do
 	### remove extension
-		sample_forward=`echo $i | sed 's/\w*\///g' | sed 's/\_R1_\w*\.fastq\.gz//g'`
+		sample_forward=`basename $i | sed 's/\_R1_\w*\.fastq\.gz//g'`
 		sample_reverse=`ls $1$sample_forward*_R2_*.fastq.gz`
 	
 		STAR --runThreadN $NUMCPUS --genomeDir $5star_index --readFilesIn $i $sample_reverse --readFilesCommand zcat --outFileNamePrefix $5star/$sample_forward --outSAMtype BAM SortedByCoordinate
