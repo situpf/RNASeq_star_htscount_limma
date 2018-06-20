@@ -58,7 +58,7 @@ STAR --runThreadN $NUMCPUS --runMode genomeGenerate --genomeDir $5star_index --g
 
 ### ALIGNMENT
 
-if [ ! -d star ]; then mkdir -p $5star;fi
+if [ ! -d star ]; then mkdir -p $5/star;fi
 
 if [ $6 == "-p" ];
 then
