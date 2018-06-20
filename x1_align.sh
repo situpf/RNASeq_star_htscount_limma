@@ -53,12 +53,12 @@ module load STAR/2.5.2b-foss-2016b
 
 
 ### GENERATE INDEX
-if [ ! -d star_index ]; then mkdir -p $5star_index;fi
-STAR --runThreadN $NUMCPUS --runMode genomeGenerate --genomeDir $5star_index --genomeFastaFiles $REF --sjdbGTFfile $GTF --sjdbOverhang $4
+if [ ! -d $5/star_index ]; then mkdir -p $5/star_index;fi
+STAR --runThreadN $NUMCPUS --runMode genomeGenerate --genomeDir $5/star_index --genomeFastaFiles $REF --sjdbGTFfile $GTF --sjdbOverhang $4
 
 ### ALIGNMENT
 
-if [ ! -d star ]; then mkdir -p $5/star;fi
+if [ ! -d $5/star ]; then mkdir -p $5/star;fi
 
 if [ $6 == "-p" ];
 then
@@ -67,20 +67,20 @@ then
 		sample_forward=`basename $i | sed 's/\_R1_\w*\.fastq\.gz//g'`
 		sample_reverse=`ls $1$sample_forward*_R2_*.fastq.gz`
 	
-		STAR --runThreadN $NUMCPUS --genomeDir $5star_index --readFilesIn $i $sample_reverse --readFilesCommand zcat --outFileNamePrefix $5star/$sample_forward --outSAMtype BAM SortedByCoordinate
+		STAR --runThreadN $NUMCPUS --genomeDir $5/star_index --readFilesIn $i $sample_reverse --readFilesCommand zcat --outFileNamePrefix $5/star/$sample_forward --outSAMtype BAM SortedByCoordinate
 	done
 else
 	for i in $reads; do
    	 ### remove extension
     		sample=`echo $i | sed 's/\w*\///g' | sed 's/\.fastq\.gz//g'` 
 
-    		STAR --runThreadN $NUMCPUS --genomeDir $5star_index --readFilesIn $i --readFilesCommand zcat --outFileNamePrefix $5star/$sample --outSAMtype BAM SortedByCoordinate
+    		STAR --runThreadN $NUMCPUS --genomeDir $5/star_index --readFilesIn $i --readFilesCommand zcat --outFileNamePrefix $5/star/$sample --outSAMtype BAM SortedByCoordinate
 	done
 fi
 
 
 #### get stats with multiqc
 module load MultiQC
-multiqc -o $5star -f $5star
+multiqc -o $5/star -f $5/star
 
 
