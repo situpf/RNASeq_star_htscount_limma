@@ -72,7 +72,7 @@ then
 else
 	for i in $reads; do
    	 ### remove extension
-    		sample=`basename $i | sed 's/\_\w*\.fastq\.gz//g'` 
+    		sample=`basename $i | sed 's/\.fastq\.gz//g'` 
 
     		STAR --runThreadN $NUMCPUS --genomeDir $5/star_index --readFilesIn $i --readFilesCommand zcat --outFileNamePrefix $5/star/$sample --outSAMtype BAM SortedByCoordinate
 	done
