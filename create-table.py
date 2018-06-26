@@ -109,13 +109,16 @@ if __name__ == "__main__":
 
     for key, value in final_htseq_dict.items():
         htseq_values[key] = ""
+        total_reads = 0
         for sub, number in value.items():
             final_htseq_dict[key][sub] = sum(number)
+            total_reads += sum(number)
         print(key, value)
         for key2, value2 in final_star_dict.items():
             if key == key2:
+                htseq_values[key] += "%s:%.2f," %("feature", (value2[0]/(value2[0]+total_reads))*100)
                 for sub, number in value.items():
-                    htseq_values[key] += "%s:%s," % (sub, number)
+                    htseq_values[key] += "%s:%.2f," % (sub, (number/(value2[0]+total_reads))*100)
                 output_file_content += "%10s\t%11.3f\t%18d\t%5s\n" %(key, value2[1], value2[0], htseq_values[key].strip(","))
 
 
@@ -123,7 +126,7 @@ if __name__ == "__main__":
 
 
 
-    ofd.write("%10s\t%13s\t%20s\t%20s\n" %("Sample", "% Alignment", "Uniquely mapped", "HTSeq summary"))
+    ofd.write("%10s\t%13s\t%20s\t%20s\n" %("Sample", "% Alignment", "Uniquely mapped", "HTSeq summary (%)"))
     ofd.write(output_file_content)
     ofd.close()
 
