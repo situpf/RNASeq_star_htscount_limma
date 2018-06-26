@@ -41,3 +41,5 @@ function counts() {
 export -f counts
 
 ls $1/star/*Aligned.sortedByCoord.out.bam | parallel --progress  -k counts {} $2 $3 $1
+
+./create-table.py $1/htscount/ $1/star/ -v
