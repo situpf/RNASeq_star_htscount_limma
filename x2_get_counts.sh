@@ -19,28 +19,25 @@
 		echo 
 		echo "OPTIONS: "
 		echo
-		echo "</path/with/fastq>:			        Enter the whole path with the sample .fastq files. "
+		echo "</path/with/results/>:			        Enter the whole path for results with star directory. "
 		echo "<file.gtf>:			                Specify the GTF file for generating the Index. "
-        	echo "<star/output/directory/>:         		Enter the directory with the star files. Example: /homes/users/username/results/star is the directory -> specify /homes/users/username/results/ "
 		echo "[yes|no|reverse]: 				Enter whether the data is from a strand-specific assay."
-		echo "[-p]:						Is the data paired? Specify -p if yes"
 		echo
 		exit 1
 	fi 
 
 
-mkdir $3/htscount/
+mkdir $1/htscount/
 module load parallel/20151222
 module load HTSeq/0.9.1-foss-2016b-Python-2.7.12
 ###  reverse gene counts with htseq-counts
 function counts() {
 
-    
-    base=`basename "$1" | sed 's/\_R\w_\w*//g' | sed 's/\.fastq.gz//g' `
+    base=`basename "$1" | sed 's/Aligned.sortedByCoord.out.bam//g' `
     echo "processing "$base
     ### counts from bam sorted by position and not strand-specific assay
-    htseq-count -f bam -r pos -s $4 $3/star/$base\Aligned.sortedByCoord.out.bam $2 > $3/htscount/$base\_htseq.csv
+    htseq-count -f bam -r pos -s $3 $1 $2 > $4/htscount/$base\_htseq.csv
 }
 export -f counts
 
-ls $1/*.fastq.gz | parallel --progress  -k counts {} $2 $3 $4 $5
+ls $1/star/*Aligned.sortedByCoord.out.bam | parallel --progress  -k counts {} $2 $3 $1
