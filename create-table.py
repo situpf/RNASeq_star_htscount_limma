@@ -1,3 +1,4 @@
+#! /usr/bin/python
 import os.path
 import argparse
 import re
