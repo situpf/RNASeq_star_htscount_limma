@@ -42,4 +42,7 @@ export -f counts
 
 ls $1/star/*Aligned.sortedByCoord.out.bam | parallel --progress  -k counts {} $2 $3 $1
 
+
+module load Python/3.5.2-foss-2016b 
+
 ./create-table.py $1/htscount/ $1/star/ -v
