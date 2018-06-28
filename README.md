@@ -1,4 +1,21 @@
 # RNASeq_star_htscount_limma
+
+
+## **TABLE OF CONTENTS**
+
+<!-- TOC depthFrom:1 depthTo:6 withLinks:1 updateOnSave:1 orderedList:0 -->
+- [RNASeq_star_htscount_limma](#RNASeq_star_htscount_limma)
+  - [Table of contents](#table-of-contents)
+  - [Description](#description)
+  - [Workflow](#workflow)
+   - [Aligning to the reference genome](#1.-Aligning-to-the-reference-genome---star)
+  
+
+  
+<!-- /TOC -->
+
+## Description
+
 Pipeline for running RNASeq data. In this directory you'll find all necessary scripts for analyzing RNASeq data and extracting some important information as coverage plots and a summary of counts. The starting point for doing so are the Fastq files. 
 
 Scripts in this directory: 
@@ -9,9 +26,9 @@ Scripts in this directory:
 * get_counts_and_fpkm.R
 * create-table.py
 
-# WORKFLOW
+## WORKFLOW
 
-## 1. Aligning to the reference genome - STAR
+### 1. Aligning to the reference genome - STAR
 First thing to do is to align the reads in FASTQ files to a reference genome. Here we have the script called **x1_align.sh** which will generate an index of the reference genome in the first place, and then it will align our input reads giving us a BAM file (among other output files) for each fastq file (or pair of fastq files if the data is paired end) aligned. 
 
 For running this script we have to call it from the terminal as follows: 
@@ -41,7 +58,7 @@ After running this script you'll find 2 new directories created inside the speci
 * **star_index**:
   * All files generated when creating the indes for the reference genome
 
-## 2. HTSeq-Count 
+### 2. HTSeq-Count 
 Now that we have aligned the reads to a reference genome and we have a BAM file with the results, it's time to use HTSeq to get the counts of the reads to each feature on a gtf file. Finally thanks to the python script available in this directory it will create a .txt file with a tabulated table with a summary of the STAR and HTSeq results. 
 
 For running this script we have to call it from the terminal as follows: 
