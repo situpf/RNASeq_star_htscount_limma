@@ -28,7 +28,7 @@ Scripts in this directory:
 
 ## WORKFLOW
 
-### Aligning to the reference genome-STAR
+### Aligning to the reference genome STAR
 First thing to do is to align the reads in FASTQ files to a reference genome. Here we have the script called **x1_align.sh** which will generate an index of the reference genome in the first place, and then it will align our input reads giving us a BAM file (among other output files) for each fastq file (or pair of fastq files if the data is paired end) aligned. 
 
 For running this script we have to call it from the terminal as follows: 
