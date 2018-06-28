@@ -25,6 +25,7 @@ The script needs 5 mandatory arguments and an extra one specifying the type of d
 3. <reference.fasta> : FASTA file with the reference genome. Please enter the full path. 
 4. Overhang : Specify a VALUE for the --sjdbOverhang parameter for aligning with STAR.
 5. </output/directory> : Specify the directory where you want to store all the output files. 
+6. \[-p] : This last optional argument is to tell the script if you're working with paired data, if it's not specified it wil assume that you're working with single-end data.  
 
 Example of running the script with human paired data: 
 ```bash 
@@ -41,3 +42,15 @@ After running this script you'll find 2 new directories created inside the speci
   * All files generated when creating the indes for the reference genome
 
 ## 2. HTSeq-Count 
+Now that we have aligned the reads to a reference genome and we have a BAM file with the results, it's time to use HTSeq to get the counts of the reads to each feature on a gtf file. Finally thanks to the python script available in this directory it will create a .txt file with a tabulated table with a summary of the STAR and HTSeq results. 
+
+For running this script we have to call it from the terminal as follows: 
+```bash 
+sbatch x2_get_counts.sh </path/with/results> <file.gtf> </yes/no/reverse>
+```
+This bash script needs 3 mandatory arguments: 
+
+1. </path/with/results> : Specify the directory where you have the results from the previous step (same argument as number 5 of the previous script). 
+2. <file.gtf> : GTF file with the features you want to get the counts. 
+3. </yes/no/reverse> : Specify if the data is stranded, no stranded or reverse stranded. 
+
