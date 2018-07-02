@@ -20,6 +20,13 @@ if __name__ == "__main__":
                             action= "store",
                             default= os.getcwd(),
                             help="Input directory with log files from STAR ")
+    
+    parser.add_argument( '-o', '--outpit_dir',
+                            dest= "output_dir",
+                            action= "store",
+                            default= os.getcwd(),
+                            help="Input directory to store the results ")
+
 
     parser.add_argument('-v', '--verbose',
                         dest="verbose",
@@ -33,6 +40,7 @@ if __name__ == "__main__":
 
     csv_path = options.csv_files
     star_path = options.star_files
+    output_dir = options.output_dir
 
     csv_listfiles = [ os.path.join(csv_path, f) for f in os.listdir(csv_path) if f.endswith(".csv")]
 
@@ -123,7 +131,7 @@ if __name__ == "__main__":
                 output_file_content += "%10s\t%11.3f\t%18d\t%5s\n" %(key, value2[1], value2[0], htseq_values[key].strip(","))
 
 
-    ofd = open("summary_star_htseq.txt", "w")
+    ofd = open("%s/summary_star_htseq.txt" %(output_dir), "w")
 
 
 
