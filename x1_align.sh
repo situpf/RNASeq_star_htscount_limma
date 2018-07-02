@@ -7,14 +7,7 @@
 
 # #SBATCH -o slurm.%j.out 
 # #SBATCH -e slurm.%j.err 
-#SBATCH --mail-type=END
-#SBATCH --mail-user=winona.oliveros01@estudiant.upf.edu
 
-#$1 = path with sample files (fastq)
-#$2 = GTF file (whole path)
-#$3 = REF file (FASTA - whole path)
-#$4 = Specify the --sjdbOverhang for generating the index with STAR (ENTER A VALUE)
-#$5 = Directory for output files
 
     if [  $# -le 4 ] || [ $1 == "--help" ] || [ $1 == "-h" ]
 	then 
