@@ -3,15 +3,6 @@
 #SBATCH --cpus-per-task=4
 #SBATCH --mem-per-cpu=8G 
 
-#SBATCH --mail-type=END
-#SBATCH --mail-user=winona.oliveros01@estudiant.upf.edu
-
-#module load R/3.2.3
-#Rscript x2_rnaseq_get-counts.R
-
-#$1 = directory with sample files (fastq)
-#$2 = GTF file ; input the whole path
-#$3 = Directory with star output files [/path/to/results/]star -> last part /star/ not necessary
 
     if [  $# -le 2 ] || [ $1 == "--help" ] || [ $1 == "-h" ]
 	then 
