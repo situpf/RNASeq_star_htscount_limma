@@ -78,5 +78,15 @@ sbatch /woliveros/RNASeq_star_htscount_limma/x2_get_counts.sh /woliveros/paired-
 ```
 After running the script you'll find 1 new directory called **htscount** and 1 new file in the results directory called **summary_star_htseq.txt**. Inside the **htscount** directory there will be several csv files containing the results of the HTSeq-count for each bam file. 
 
-
+The **summary_star_htseq.txt** file contains the summary of the star and HTSeq programs. The file contains 4 columns:    
+* Sample: name of the sample 	 
+* % Alignment: % of reads aligned to the reference genome (STAR)     
+* Uniquely mapped: number of uniquely mapped reads to the reference genome (STAR)	   
+* HTSeq summary (%): % of mapped reads for the following categories.
+   * feature
+   * too_low_aQual
+   * alignment_not_unique
+   * no_feature
+   * ambiguous
+   * not_aligned
 
