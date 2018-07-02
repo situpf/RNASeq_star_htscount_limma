@@ -45,9 +45,9 @@ The script needs 5 mandatory arguments and an extra one specifying the type of d
 5. </output/directory> : Specify the directory where you want to store all the output files. 
 6. \[-p] : This last optional argument is to tell the script if you're working with paired data, if it's not specified it wil assume that you're working with single-end data.  
 
-Example of running the script with human paired data: 
+Example of running the script with paired data: 
 ```bash 
-sbatch /woliveros/RNASeq_star_htscount_limma/x1_align.sh /woliveros/scratch/Test_RNASeq /woliveros/scratch/Test_RNASeq/Schizosaccharomyces_pombe.ASM294v2.39.gtf /woliveros/scratch/Test_RNASeq/Schizosaccharomyces_pombe.ASM294v2.dna.toplevel.fa 49 /woliveros/scratch/Test_RNASeq/results2
+sbatch /woliveros/RNASeq_star_htscount_limma/x1_align.sh /woliveros/scratch/Test_RNASeq /woliveros/scratch/Test_RNASeq/Schizosaccharomyces_pombe.ASM294v2.39.gtf /woliveros/scratch/Test_RNASeq/Schizosaccharomyces_pombe.ASM294v2.dna.toplevel.fa 49 /woliveros/scratch/Test_RNASeq/results2 -p
 ```
 After running this script you'll find 2 new directories created inside the specified output directory with some files inside: 
 * **star**:
@@ -71,4 +71,12 @@ This bash script needs 3 mandatory arguments:
 1. </path/with/results> : Specify the directory where you have the results from the previous step (same argument as number 5 of the previous script). 
 2. <file.gtf> : GTF file with the features you want to get the counts. 
 3. </yes/no/reverse> : Specify if the data is stranded, no stranded or reverse stranded. 
+
+Example of running the script with human paired data: 
+```bash
+sbatch /woliveros/RNASeq_star_htscount_limma/x2_get_counts.sh /woliveros/paired-end/results2/ /woliveros/Genomes/hsapiens_hg38-GRCh38_ensembl/Homo_sapiens.GRCh38.89.gtf yes
+```
+After running the script you'll find 1 new directory called **htscount** and 1 new file in the results directory called **summary_star_htseq.txt**. Inside the **htscount** directory there will be several csv files containing the results of the HTSeq-count for each bam file. 
+
+
 
