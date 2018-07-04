@@ -29,6 +29,13 @@ Scripts in this directory:
 
 ## WORKFLOW
 
+### Export path to the directory with all the scripts
+Before starting with the analysis of RNASeq data we have to export the path to the directory were you have all the scripts. On the script **x2_get_counts.sh** one of the firts lines is: 
+
+> export PATH:$PATH="/path/to/RNASeq_star_htscount_limma"
+
+After doing the **git clone** you'll have to modify this line telling the correct path to the RNASeq_star_htscount_limma directory. 
+
 ### Aligning to the reference genome STAR
 First thing to do is to align the reads in FASTQ files to a reference genome. Here we have the script called **x1_align.sh** which will generate an index of the reference genome in the first place, and then it will align our input reads giving us a BAM file (among other output files) for each fastq file (or pair of fastq files if the data is paired end) aligned. 
 
