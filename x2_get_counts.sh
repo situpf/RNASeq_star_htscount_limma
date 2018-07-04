@@ -3,6 +3,7 @@
 #SBATCH --cpus-per-task=4
 #SBATCH --mem-per-cpu=8G 
 
+export PATH:$PATH="/path/to/RNASeq_star_htscount_limma"
 
     if [  $# -le 2 ] || [ $1 == "--help" ] || [ $1 == "-h" ]
 	then 
@@ -36,4 +37,4 @@ ls $1/star/*Aligned.sortedByCoord.out.bam | parallel --progress  -k counts {} $2
 
 module load Python/3.5.2-foss-2016b 
 
-./create-table.py -c $1/htscount/ -s $1/star/ -o $1 -v
+create-table.py -c $1/htscount/ -s $1/star/ -o $1 -v
