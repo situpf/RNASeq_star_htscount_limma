@@ -7,7 +7,7 @@ export PATH:$PATH="/path/to/RNASeq_star_htscount_limma"
 
     if [  $# -le 2 ] || [ $1 == "--help" ] || [ $1 == "-h" ]
 	then 
-		echo -e "\nUsage: x2_get_counts.sh </path/with/fastq> <file.gtf> [yes|no|reverse] \n" 
+		echo -e "\nUsage: ${0} </path/with/fastq> <file.gtf> [yes|no|reverse] \n" 
 		echo 
 		echo "OPTIONS: "
 		echo
