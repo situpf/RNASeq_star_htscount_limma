@@ -32,7 +32,7 @@ Scripts in this directory:
 ### Export path to the directory with all the scripts
 Before starting with the analysis of RNASeq data we have to export the path to the directory were you have all the scripts. On the script **x2_get_counts.sh** one of the firts lines is: 
 
-> export PATH:$PATH="/path/to/RNASeq_star_htscount_limma"
+> export PATH=$PATH:"/path/to/RNASeq_star_htscount_limma"
 
 After doing the **git clone** you'll have to modify this line telling the correct path to the RNASeq_star_htscount_limma directory. 
 
