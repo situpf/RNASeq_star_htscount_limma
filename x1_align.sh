@@ -11,7 +11,7 @@
 
     if [  $# -le 4 ] || [ $1 == "--help" ] || [ $1 == "-h" ]
 	then 
-		echo -e "\nUsage: x1_align.sh </path/with/fastq> <file.gtf> <reference.fasta> <Overhang> </output/directory> \n" 
+		echo -e "\nUsage: ${0} </path/with/fastq> <file.gtf> <reference.fasta> <Overhang> </output/directory> \n" 
 		echo 
 		echo "OPTIONS: "
 		echo
