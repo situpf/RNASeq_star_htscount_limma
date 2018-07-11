@@ -69,7 +69,7 @@ if __name__ == "__main__":
                 star[star_file].append(sp_line[1])
             elif "Uniquely mapped reads %" in line:
                 line3 = line.strip().split("\t")
-                star[star_file].append(line3[1])
+                star[star_file].append(line3[1].strip("%"))
         fd.close()
 
     samples = []
@@ -108,7 +108,7 @@ if __name__ == "__main__":
         average_mapped = []
         for comb in value:
             total_uniq_mapped.append(int(comb[0]))
-            average_mapped.append(float(comb[1][0:5]))
+            average_mapped.append(float(comb[1]))
         final_star_dict[key] = [sum(total_uniq_mapped), mean(average_mapped)]
 
     for key, value in final_star_dict.items():
