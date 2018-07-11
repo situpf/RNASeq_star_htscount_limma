@@ -128,7 +128,7 @@ if __name__ == "__main__":
             if key == key2:
                 htseq_values[key] += "%s:%.2f," %("feature", (value2[0]/(value2[0]+total_reads))*100)
                 for name in htseq_names:
-                    htseq_values[key] += "%s:%.2f," %(name, value[name]/((value2[0]+total_reads))*100))
+                    htseq_values[key] += "%s:%.2f," %(name, value[name]/((value2[0]+total_reads))*100)
                 #for sub, number in value.items():
                  #   htseq_values[key] += "%s:%.2f," % (sub, (number/(value2[0]+total_reads))*100)
                 output_file_content += "%10s\t%11.3f\t%18d\t%5s\n" %(key, value2[1], value2[0], htseq_values[key].strip(","))
