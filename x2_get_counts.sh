@@ -3,7 +3,7 @@
 #SBATCH --cpus-per-task=4
 #SBATCH --mem-per-cpu=8G 
 
-export PATH:$PATH="/path/to/RNASeq_star_htscount_limma"
+export PATH=$PATH:"/path/to/RNASeq_star_htscount_limma"
 
     if [  $# -le 2 ] || [ $1 == "--help" ] || [ $1 == "-h" ]
 	then 
