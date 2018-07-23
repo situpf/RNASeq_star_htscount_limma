@@ -53,10 +53,14 @@ if __name__ == "__main__":
         fd = open(csv_file, "r")
 
         htseq[csv_file] = {}
+        htseq[csv_file]["feature"] = 0
         for line in fd:
             if "__" in line:
                 split_line = line.strip().split("\t")
                 htseq[csv_file][split_line[0][2:]] = int(split_line[1])
+            else:
+                split_line = line.strip().split("\t")
+                htseq[csv_file]["feature"] += int(split_line[1])
         fd.close()
 
     for star_file in star_listfiles:
@@ -115,6 +119,7 @@ if __name__ == "__main__":
         print(key, value)
 
     output_file_content = ""
+    htseq_names = ["feature", "ambiguous", "no_feature", "too_low_aQual", "not_aligned"]
 
     for key, value in final_htseq_dict.items():
         htseq_values[key] = ""
@@ -125,14 +130,12 @@ if __name__ == "__main__":
         print(key, value)
         for key2, value2 in final_star_dict.items():
             if key == key2:
-                htseq_values[key] += "%s:%.2f," %("feature", (value2[0]/(value2[0]+total_reads))*100)
-                for sub, number in value.items():
-                    htseq_values[key] += "%s:%.2f," % (sub, (number/(value2[0]+total_reads))*100)
+                for name in htseq_names:
+                    htseq_values[key] += "%s:%.2f," %(name, value[name]/((value2[0]))*100)
                 output_file_content += "%10s\t%11.3f\t%18d\t%5s\n" %(key, value2[1], value2[0], htseq_values[key].strip(","))
 
 
     ofd = open("%s/summary_star_htseq.txt" %(output_dir), "w")
-
 
 
     ofd.write("%10s\t%13s\t%20s\t%20s\n" %("Sample", "% Alignment", "Uniquely mapped", "HTSeq summary (%)"))
